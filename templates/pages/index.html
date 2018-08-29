@@ -60,15 +60,20 @@
 </div>
 
 <ul class="posts-list">
-{% for post in posts | limit(5) %}
+{%- for post in posts | limit(5) %}
   <li class="post">
-    <span class="post-date">{{post.data.publishedStr}}</span>
-    <h2 class="post-title"><a href="{{post.href}}">{{post.data.title}}</a></h2>
+    <div class="post-date">{{post.data.publishedStr}}</div>
+    <h2 class="post-title">
+      {%- if 'medium.com' in post.href %}
+        <img src="/img/icons/medium.svg" class="icon medium-icon" title="Posted on Medium" alt="Medium post">
+      {%- endif %}
+      <a href="{{post.href}}">{{post.data.title}}</a>
+    </h2>
     <div class="post-summary">{{post.excerpt | safe | striptags(true) | truncate(200) }}</div>
   </li>
-{% else %}
+{%- else %}
   <li>No posts yet!</li>
-{% endfor %}
+{%- endfor %}
 </ul>
 
 <hr>

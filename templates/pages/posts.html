@@ -15,8 +15,11 @@
 .posts-list a {
   text-decoration: none;
 }
+.posts-list .post {
+  margin: var(--content-padding) 0;
+}
 .posts-list .post-title {
-  margin-top: 0;
+  margin: 0;
 }
 .posts-list .post-date {
   font-size: 13px;
@@ -27,28 +30,29 @@
 {% endblock %}
 
 {% block content %}
-
 <section>
 <ul class="posts-list">
 
-{% for year, posts in years %}
+{%- for year, posts in years %}
   <li>
     <h1 class="post-year">{{year}}</h1>
     <ul>
       {% for post in posts %}
-        <li class="post">
+        <li class="post layout horizontal vcenter">
+          {%- if 'medium.com' in post.href %}
+           <img src="/img/icons/medium.svg" class="icon medium-icon" title="Posted on Medium" alt="Medium post">
+          {%- endif %}
           <h3 class="post-title">
             <a href="{{post.href}}">{{post.data.title}}</a>
             <span class="post-date">{{post.data.publishedStr}}</span>
           </h3>
         </li>
-      {% endfor %}
+      {%- endfor %}
     </ul>
   </li>
-{% endfor %}
+{%- endfor %}
 </ul>
 </section>
-
 {% endblock %}
 
 {% block scripts %}
