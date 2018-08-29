@@ -2,10 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width, Downlink, Save-Data, Content-DPR">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0069c0">
-  <meta name="description" content="Eric Bidelman's Blog">
+
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin
+
+  <title>{% block title %}{% endblock %} - Eric Bidelman</title>
   <meta name="author" content="Eric Bidelman">
+  <link rel="home" href="https://ericbidelman.com/">
+
+  <link rel="icon" sizes="192x192" href="/img/icon_400x400.png">
+  {#
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans"> -->
+    <!-- <link rel="manifest" href="/manifest.json"> -->
+  #}
+  <link rel="stylesheet" href="/css/combined{% if not DEV %}.min{% endif %}.css">
+  <script>
+    window.WebFontConfig = {
+      google: {families: ['Google+Sans:300,400,600']},
+      classes: false,
+      events: false,
+      // active: function() { }
+    };
+  </script>
+  <script async src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@ebidel">
   <meta name="twitter:creator" content="@ebidel">
@@ -25,22 +49,6 @@
       ]
     }
   </script>
-  <title>{% block title %}{% endblock %} - Eric Bidelman</title>
-  <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="/img/icon_400x400.png">
-  <link rel="icon" sizes="142x192" href="/img/icon_400x400.png">
-  <link rel="shortcut icon" href="/img/icon_400x400.png">
-  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans"> -->
-  <link rel="stylesheet" href="/css/combined{% if not DEV %}.min{% endif %}.css">
-  <script>
-    window.WebFontConfig = {
-      google: {families: ['Google+Sans:300,400,600']},
-      classes: false,
-      events: false,
-      // active: function() { }
-    };
-  </script>
-  <script async src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
   {% block head %}{% endblock %}
 </head>
 <body>
