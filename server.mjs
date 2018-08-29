@@ -23,7 +23,6 @@ function errorHandler(err, req, res, next) {
 /* eslint-enable */
 
 const DEV = process.env.DEV || false;
-const PROD = !DEV;
 const PORT = process.env.PORT || 8080;
 // const GA_ACCOUNT = 'UA-24818445-1';
 const app = express();
@@ -85,13 +84,13 @@ app.get('/posts/:year/:month/:file', (req, res, next) => {
 
   // const content = fs.readFileSync(path, {encoding: 'utf-8'});
   // res.send(marked(content));
-  res.render('post.html', {year, month, file, post});
+  res.render('post.html', {year, month, file, post, DEV});
 });
 
 // Provide this data to all subsequent handler.
 app.use(async function includeData(req, res, next) {
   res.locals.data = {
-    PROD,
+    DEV,
     posts: await posts.list(POSTS_DIR),
   };
   next();

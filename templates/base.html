@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#dadada">
+  <meta name="theme-color" content="#0069c0">
   <meta name="description" content="Eric Bidelman's Blog">
   <meta name="author" content="Eric Bidelman">
   <meta name="twitter:card" content="summary">
@@ -31,9 +31,7 @@
   <link rel="icon" sizes="142x192" href="/img/icon_400x400.png">
   <link rel="shortcut icon" href="/img/icon_400x400.png">
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans"> -->
-  <link rel="stylesheet" href="/css/combined{% if PROD %}.min{% endif %}.css">
-  <!-- <link rel="stylesheet" href="/css/layout.css"> -->
-  <link rel="preload" href="{% if PROD %}/css/github.min.css{% else %}/highlight.js/styles/github.css{% endif %}" onload="this.rel='stylesheet'" as="style">
+  <link rel="stylesheet" href="/css/combined{% if not DEV %}.min{% endif %}.css">
   <script>
     window.WebFontConfig = {
       google: {families: ['Google+Sans:300,400,600']},
@@ -58,7 +56,7 @@
 {% include "footer.html" %}
 
 <!-- <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script> -->
-<script type="module" src="/js/app{% if PROD %}.bundle{% endif %}.js"></script>
+<script type="module" src="/js/app{% if not DEV %}.bundle{% endif %}.js"></script>
 <script nomodule src="/js/app.min.js"></script>
 
 {% block scripts %}{% endblock %}

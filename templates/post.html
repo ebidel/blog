@@ -3,7 +3,7 @@
 {% block title %}{{post.data.title}}{% endblock %}
 
 {% block head %}
-
+<link rel="preload" href="{% if DEV %}/highlight.js/styles/github.css{% else %}/css/github.min.css{% endif %}" onload="this.rel='stylesheet'" as="style">
 {% endblock %}
 
 {% block content %}
