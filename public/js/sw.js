@@ -1,13 +1,12 @@
-self.addEventListener('install', function(e) {
-  // console.log("SW install");
+self.addEventListener('install', e => {
   self.skipWaiting();
 });
 
-// self.addEventListener('activate', function(event) {
-//   console.log("SW activated");
+// self.addEventListener('activate', e => {
+//   e.waitUntil(clients.claim());
 // });
 
-self.addEventListener('fetch', function(e) {
+self.addEventListener('fetch', e => {
   const requestURL = new URL(e.request.url);
 
   // Check that the browser supports .webp images.

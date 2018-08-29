@@ -6,43 +6,76 @@
 <!-- <link rel="modulepreload" href="/render.js"> -->
 <!-- <link rel="modulepreload" href="/lit-html/lit-html.js"> -->
 <!-- <link rel="modulepreload" href="/lit-html/lib/repeat.js"> -->
+<style>
+.posts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: calc(var(--content-padding) * 3);
+}
+.posts-list li {
+  padding: var(--content-padding) 0;
+}
+.posts-list a {
+  text-decoration: none;
+}
+.posts-list .post-title {
+  margin-top: 0;
+}
+#avatar-container {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  padding: 4px;
+  margin-right: var(--content-padding);
+  flex-shrink: 0;
+}
+.avatar {
+  background: url(https://avatars2.githubusercontent.com/u/238208?v=3&s=460) no-repeat 50% 50%;
+  background-size: contain;
+  border-radius: inherit;
+  height: 100%;
+  width: 100%;
+}
+#me h1 {
+  margin-bottom: 0;
+}
+#me summary {
+  color: var(--md-grey-primary);
+}
+</style>
 {% endblock %}
 
 {% block content %}
 <section>
 
-{% markdown %}
-# Welcome!
+<div id="me" class="layout horizontal vcenter">
+  <div id="avatar-container" class="shadow">
+    <div class="avatar" title="sup"></div>
+  </div>
+  <div>
+    <h1>Eric Bidelman</h1>
+    <summary>Frontend Engineer at Google working on the Chrome. Enjoy the ramblings.</summary>
+  </div>
+</div>
 
-Here are some ramblings I've written:
-
-<ul>
-{% for post in posts %}
-  <li>{{ post.title }}</li>
+<ul class="posts-list">
+{% for post in posts | limit(5) %}
+  <li class="post">
+    <span class="post-date">{{post.data.publishedStr}}</span>
+    <h2 class="post-title"><a href="{{post.href}}">{{post.data.title}}</a></h2>
+    <div class="post-summary">{{post.excerpt | safe | striptags(true) | truncate(200) }}</div>
+  </li>
 {% else %}
   <li>No posts yet!</li>
 {% endfor %}
 </ul>
 
-```html
-<link rel="icon" sizes="142x192" href="/img/icon_400x400.png">
-<link rel="shortcut icon" href="/img/icon_400x400.png">
-<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans"> -->
+<hr>
 
-<script>
-  window.WebFontConfig = {
-    google: {families: ['Google+Sans:300,400,600']},
-    classes: false,
-    events: false,
-    // active: function() { }
-  };
-</script>
-<script async src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
-<link rel="stylesheet" href="/css/app.css">
-{% block head %}{% endblock %}
-</head>
-```
-{% endmarkdown %}
+<p class="layout horizontal end">
+  <a href="/posts">More articles &rarr;</a>
+</p>
 
 </section>
 {% endblock %}

@@ -141,5 +141,5 @@ gulp.task('build', function() {
 
 // Build production files.
 gulp.task('default', ['clean'], cb => {
-  runSequence('build', cb);
+  runSequence('build', 'images', cb);
 });

@@ -47,7 +47,6 @@
 </head>
 <body>
 
-<!-- {% block header %}{% endblock %} -->
 {% include "header.html" %}
 
 <main class="main-content">
@@ -59,23 +58,34 @@
 {% include "footer.html" %}
 
 <!-- <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script> -->
-
 <script type="module" src="/js/app{% if PROD %}.bundle{% endif %}.js"></script>
 <script nomodule src="/js/app.min.js"></script>
 
 {% block scripts %}{% endblock %}
 
-<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114661299-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-24818445-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'UA-114661299-1');
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/js/sw.js')
-      .then(reg => console.log('SW registered!'))
-      .catch(err => console.error('Boo!', err));
-  }
-</script> -->
+  gtag('config', 'UA-24818445-1');
+
+  // if ('serviceWorker' in navigator) {
+  //   navigator.serviceWorker.register('/sw.js').then(reg => {
+  //     console.log('SW registered!');
+  //     // reg.onupdatefound = function() {
+  //     //   reg.installing.onstatechange = function(e) {
+  //     //     if (e.target.state === 'installed') {
+  //     //       // If page isn't controlled by sw, force refresh so it can control
+  //     //       // the page and server smaller images are downloaded.
+  //     //       if (!navigator.serviceWorker.controller) {
+  //     //         location.reload();
+  //     //       }
+  //     //     }
+  //     //   };
+  //     // };
+  //   }).catch(err => console.error('Boo!', err));
+  // }
+</script>
 </body>
 </html>

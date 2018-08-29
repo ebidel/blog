@@ -4,19 +4,24 @@
 
 {% block head %}
 <style>
-.posts-list {
+.posts-list, .posts-list ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.posts-list li {
-  padding: var(--content-padding) 0;
+.posts-list > li {
+  margin-bottom: calc(var(--content-padding) * 2);
 }
 .posts-list a {
   text-decoration: none;
 }
 .posts-list .post-title {
   margin-top: 0;
+}
+.posts-list .post-date {
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-left: var(--content-padding);
 }
 </style>
 {% endblock %}
@@ -25,14 +30,21 @@
 
 <section>
 <ul class="posts-list">
-{% for post in posts %}
-  <li class="post">
-    <span class="post-date">{{post.data.publishedStr}}</span>
-    <h2 class="post-title"><a href="{{post.href}}">{{post.data.title}}</a></h2>
-    <div class="post-summary">{{post.excerpt | safe | striptags(true) | truncate(200) }}</div>
+
+{% for year, posts in years %}
+  <li>
+    <h1 class="post-year">{{year}}</h1>
+    <ul>
+      {% for post in posts %}
+        <li class="post">
+          <h3 class="post-title">
+            <a href="{{post.href}}">{{post.data.title}}</a>
+            <span class="post-date">{{post.data.publishedStr}}</span>
+          </h3>
+        </li>
+      {% endfor %}
+    </ul>
   </li>
-{% else %}
-  <li>No posts yet!</li>
 {% endfor %}
 </ul>
 </section>

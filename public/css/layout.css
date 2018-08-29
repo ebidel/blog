@@ -12,6 +12,10 @@
 .layout.horizontal.justified {
   justify-content: space-between;
 }
+.layout.horizontal.vcenter {
+  align-items: center;
+}
+
 .layout.vertical {
   flex-direction: column;
 }
@@ -29,7 +33,4 @@
 }
 .side-by-side > * {
   width: calc(50% - 32px);
-}
-.center {
-  text-align: center;
 }

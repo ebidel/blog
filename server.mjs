@@ -25,14 +25,8 @@ function errorHandler(err, req, res, next) {
 const DEV = process.env.DEV || false;
 const PROD = !DEV;
 const PORT = process.env.PORT || 8080;
-// const GA_ACCOUNT = 'UA-114816386-1';
+// const GA_ACCOUNT = 'UA-24818445-1';
 const app = express();
-
-const env = nunjucks.configure(['./templates', POSTS_DIR], {
-  autoescape: true,
-  express: app,
-  watch: DEV,
-});
 
 marked.setOptions({
   gfm: true,
@@ -42,6 +36,14 @@ marked.setOptions({
     return highlight.highlightAuto(code).value;
   },
 });
+
+const env = nunjucks.configure(['./templates', POSTS_DIR], {
+  autoescape: true,
+  express: app,
+  watch: DEV,
+});
+
+env.addFilter('limit', (arr, limit) => arr.slice(0, limit));
 
 markdown.register(env, marked);
 
@@ -59,7 +61,6 @@ app.use(function forceSSL(req, res, next) {
 //   next();
 // });
 
-
 // app.get('/:demoPage', (req, res, next) => {
 //   // const demoPage = req.params.demoPage;
 //   // console.log(demoPage)
@@ -70,9 +71,9 @@ app.use(function forceSSL(req, res, next) {
 app.use(express.static('public', {extensions: ['html', 'htm']}));
 app.use(express.static('node_modules'));
 
-// Handle / dynamically.
-app.get('/', (req, res, next) => {
-  return res.render(`pages/index.html`, {PROD});
+// TODO: check cache headers on this.
+app.get('/sw.js', (req, res, next) => {
+  res.sendFile('/js/sw.js', {root: './public'});
 });
 
 app.get('/posts/:year/:month/:file', (req, res, next) => {
@@ -83,30 +84,50 @@ app.get('/posts/:year/:month/:file', (req, res, next) => {
   const post = posts.get(`${POSTS_DIR}/${year}/${month}/${file}.md`);
 
   // const content = fs.readFileSync(path, {encoding: 'utf-8'});
-  res.render('post.html', {year, month, file, post});
   // res.send(marked(content));
+  res.render('post.html', {year, month, file, post});
+});
+
+// Provide this data to all subsequent handler.
+app.use(async function includeData(req, res, next) {
+  res.locals.data = {
+    PROD,
+    posts: await posts.list(POSTS_DIR),
+  };
+  next();
+});
+
+// Handle / dynamically.
+app.get('/', (req, res, next) => {
+  return res.render(`pages/index.html`, res.locals.data);
+});
+
+app.get('/posts', async (req, res, next) => {
+  const posts = res.locals.data.posts;
+  const postsByYear = new Map();
+  posts.map(post => {
+    const year = post.data.published.getFullYear();
+    if (postsByYear.has(year)) {
+      postsByYear.get(year).push(post);
+    } else {
+      postsByYear.set(year, [post]);
+    }
+  });
+  const data = Object.assign({years: postsByYear.entries()}, res.locals.data);
+  return res.render('pages/posts.html', data);
 });
 
 app.get('/:page', async (req, res, next) => {
-  const page = req.params.page;
-
-  // res.send(fs.readFileSync('./public/index.html', {encoding: 'utf-8'}));
-
-  let data = {PROD};
-  if (page === 'posts') {
-    data = Object.assign({posts: await posts.list(POSTS_DIR)}, data);
-  }
-
-  return res.render(`pages/${page}.html`, data);
+  return res.render(`pages/${req.params.page}.html`, res.locals.data);
 });
 
-app.use(errorHandler);
+app.use(errorHandler); // catch all.
 
 app.listen(PORT, async () => {
   console.log(`App listening on port ${PORT}`); /* eslint-disable-line */
   console.log('Press Ctrl+C to quit.'); /* eslint-disable-line */
-  console.log('Populating posts...');
-  await posts.list(POSTS_DIR);
-  console.log('Done.');
+  // console.log('Populating posts...');
+  // await posts.list(POSTS_DIR);
+  // console.log('Done.');
 });
 
