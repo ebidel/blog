@@ -4,13 +4,13 @@ import filesize from 'rollup-plugin-filesize';
 import {terser} from 'rollup-plugin-terser';
 import postcss from 'postcss';
 import cssnano from 'cssnano';
-import postCSSCustomVariables from 'postcss-css-variables';
+// import postCSSCustomVariables from 'postcss-css-variables';
 import postCSSImport from 'postcss-import';
 
-// Minify css. Google search runs Chrome 41, which doesn't support CSS custom properties :(
+// Minify css.
 postcss([
   postCSSImport(),
-  // postCSSCustomVariables(),
+  // postCSSCustomVariables(), // Google search runs Chrome 41, which doesn't support CSS custom properties :(
 ]).process(fs.readFileSync('./public/css/combined.css', 'utf8'), {
   from: './public/css/combined.css',
 }).then(result => cssnano.process(result.css))
