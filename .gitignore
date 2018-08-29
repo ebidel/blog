@@ -1,6 +1,7 @@
 # Ignore NPM stuff.
 node_modules
 npm-debug.log
+yarn-error.log
 
 # Other generated/common stuff.
 .vscode
@@ -8,5 +9,9 @@ npm-debug.log
 .DS_Store
 *.pyc
 **/dist/**
+**/*.min.js
+**/*.bundle.js
+**/*.min.css
+**/img/*.webp
 
 letsencrypt/

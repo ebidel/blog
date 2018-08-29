@@ -1,0 +1,35 @@
+/* layout classes */
+.layout {
+  display: flex;
+}
+.layout.horizontal.center {
+  justify-content: center;
+}
+.layout.horizontal.center-center {
+  align-items: center;
+  justify-content: center;
+}
+.layout.horizontal.justified {
+  justify-content: space-between;
+}
+.layout.vertical {
+  flex-direction: column;
+}
+.flex {
+  flex: 1;
+}
+.layout.horizontal.end {
+  justify-content: flex-end;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.side-by-side {
+  justify-content: space-between;
+}
+.side-by-side > * {
+  width: calc(50% - 32px);
+}
+.center {
+  text-align: center;
+}

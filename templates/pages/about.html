@@ -24,6 +24,19 @@
   height: 100%;
   width: 100%;
 }
+#contact_list {
+  padding-left: 0;
+}
+#contact_list li {
+  display: flex;
+  align-items: center;
+  margin: var(--content-padding) 0;
+}
+#contact_list .icon {
+  height: 30px;
+  width: 30px;
+  margin-right: calc(var(--content-padding) / 2);
+}
 </style>
 {% endblock %}
 
@@ -43,7 +56,8 @@ since 2008.</p>
 
 <p>While at Google, I've had the privilege to lead and build large sites like the
 official <a href="https://events.google.com/io2016/" target="_blank" rel="noopener">Google I/O web app</a>, <a href="https://santatracker.google.com/" target="_blank" rel="noopener">Google's Santa Tracker</a>,
-the <a href="https://www.chromestatus.com/" target="_blank" rel="noopener">Chrome Status Feature Dashboard</a>, and <a href="https://www.html5rocks.com/" target="_blank" rel="noopener">html5rocks.com</a>.</p>
+the <a href="https://www.chromestatus.com/" target="_blank" rel="noopener">Chrome Status Feature Dashboard</a>,
+and <a href="https://www.html5rocks.com/" target="_blank" rel="noopener">html5rocks.com</a>.</p>
 
 <p>Back in 2011, I authored
 "<a href="https://www.amazon.com/Using-HTML5-Filesystem-Eric-Bidelman-ebook/dp/B005KOJ3YA/ref=la_B008RZSFE8_1_1?s=books&ie=UTF8&qid=1483463407&sr=1-1" target="_blank" rel="noopener">Using the HTML5 Filesystem API</a>"
@@ -54,11 +68,11 @@ where I designed web applications and APIs for the University's 19 libraries.
 Go Blue!</p>
 
 <h2>Contact</h2>
-<ul>
-  <li>Github: <a href="https://github.com/ebidel" target="_blank" rel="noopener">github.com/ebidel</a></li>
-  <li>Twitter: <a href="https://twitter.com/ebidel" target="_blank" rel="noopener">@ebidel</a></li>
-  <li>G+: <a href="https://google.com/+EricBidelman" target="_blank" rel="noopener">@ebidel</a></li>
-  <li><a href="https://www.linkedin.com/in/ericbidelman" target="_blank" rel="noopener">Linkedin</a></li>
+<ul id="contact_list">
+  <li><img src="/img/icons/github.svg" class="icon"><a href="https://github.com/ebidel" target="_blank" rel="noopener">github.com/ebidel</a></li>
+  <li><img src="/img/icons/twitter.svg" class="icon"><a href="https://twitter.com/ebidel" target="_blank" rel="noopener">@ebidel</a></li>
+  <li><img src="/img/icons/gplus.svg" class="icon"><a href="https://google.com/+EricBidelman" target="_blank" rel="noopener">+EricBidelman</a></li>
+  <li><img src="/img/icons/email.svg" class="icon"><a href="mailto:ebidel@gmail.com" target="_blank" rel="noopener">Email</a></li>
 </ul>
 
 </section>

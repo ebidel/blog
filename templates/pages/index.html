@@ -10,7 +10,40 @@
 
 {% block content %}
 <section>
-  TODO
+
+{% markdown %}
+# Welcome!
+
+Here are some ramblings I've written:
+
+<ul>
+{% for post in posts %}
+  <li>{{ post.title }}</li>
+{% else %}
+  <li>No posts yet!</li>
+{% endfor %}
+</ul>
+
+```html
+<link rel="icon" sizes="142x192" href="/img/icon_400x400.png">
+<link rel="shortcut icon" href="/img/icon_400x400.png">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans"> -->
+
+<script>
+  window.WebFontConfig = {
+    google: {families: ['Google+Sans:300,400,600']},
+    classes: false,
+    events: false,
+    // active: function() { }
+  };
+</script>
+<script async src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
+<link rel="stylesheet" href="/css/app.css">
+{% block head %}{% endblock %}
+</head>
+```
+{% endmarkdown %}
+
 </section>
 {% endblock %}
 

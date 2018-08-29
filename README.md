@@ -1,4 +1,4 @@
-Site: [https://ebidel.com/](ebidel.com)
+Site: [https://ericbidelman.com/](ericbidelman.com)
 
 ### Development
 
@@ -8,11 +8,17 @@ Get the code:
     cd blog
     yarn install
 
-Start up the App Engine dev server. Run `gulp` any time you make changes to JS code.
+To run, start the server. The `env` variable `DEV=true` will recompile
+nunjucks templates as edits are made and server the unminified JS/CSS files.
+
+   yarn start
+   DEV=true yarn start
+
+Run `gulp` any time you make changes to JS code.
 
 ### Deployment
 
-    ./scripts/deploy.sh 2017-01-01
+    yarn deploy
 
 ### Updating the SSL cert
 

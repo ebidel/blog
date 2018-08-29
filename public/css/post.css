@@ -1,0 +1,12 @@
+.post-date {
+  color: var(--md-blue-grey-400);
+}
+.post-header {
+  margin-bottom: calc(var(--content-padding) * 3);
+}
+.post-header .post-title {
+  margin-bottom: 0;
+}
+/* .posts-list .post {
+  border-bottom: 1px solid var(--md-blue-grey-50);
+} */

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Posts{% endblock %}
+
+{% block head %}
+<style>
+.posts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.posts-list li {
+  padding: var(--content-padding) 0;
+}
+.posts-list a {
+  text-decoration: none;
+}
+.posts-list .post-title {
+  margin-top: 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section>
+<ul class="posts-list">
+{% for post in posts %}
+  <li class="post">
+    <span class="post-date">{{post.data.publishedStr}}</span>
+    <h2 class="post-title"><a href="{{post.href}}">{{post.data.title}}</a></h2>
+    <div class="post-summary">{{post.excerpt | safe | striptags(true) | truncate(200) }}</div>
+  </li>
+{% else %}
+  <li>No posts yet!</li>
+{% endfor %}
+</ul>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

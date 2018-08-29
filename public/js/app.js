@@ -1,12 +1,12 @@
-((exports) => {
-'use strict';
+/* global ga:false */
 
 const scroller = document.scrollingElement || document.body;
-const navbar = document.querySelector('.navbar');
+// const navbar = document.querySelector('.navbar');
 
-let _disableElementScrollTimeout = null;
+// let _disableElementScrollTimeout = null;
 
 // From http://en.wikipedia.org/wiki/Smoothstep
+// eslint-disable-next-line
 function smoothStep(start, end, point) {
   if (point <= start) {
     return 0;
@@ -57,29 +57,29 @@ function smoothScroll(el, duration = 1, callback = null, offset = 0) {
   cb(startTime);
 }
 
-/**
- * Disables a container from user interaction (using pointer-events: none)
- * when the page is scrolling. Enables it again
- *
- * @param {HTMLElement} container The container to
- * @param {Function} callback Optional callback, invoked when the user
- *     has stopped scrolling after opt_enableAfter ms (or default 250ms).
- * @param {boolean} enableAfter Optional number of ms to enable
- *     interaction on the container after the user has stopped scrolling.
- */
-function disableElementOnScroll(container, callback=null, enableAfter=250) {
-  if (!_disableElementScrollTimeout) {
-    container.style.pointerEvents = 'none';
-  }
+// /**
+//  * Disables a container from user interaction (using pointer-events: none)
+//  * when the page is scrolling. Enables it again
+//  *
+//  * @param {HTMLElement} container The container to
+//  * @param {Function} callback Optional callback, invoked when the user
+//  *     has stopped scrolling after opt_enableAfter ms (or default 250ms).
+//  * @param {boolean} enableAfter Optional number of ms to enable
+//  *     interaction on the container after the user has stopped scrolling.
+//  */
+// function disableElementOnScroll(container, callback=null, enableAfter=250) {
+//   if (!_disableElementScrollTimeout) {
+//     container.style.pointerEvents = 'none';
+//   }
 
-  clearTimeout(_disableElementScrollTimeout);
+//   clearTimeout(_disableElementScrollTimeout);
 
-  _disableElementScrollTimeout = setTimeout(function() {
-    container.style.pointerEvents = 'auto';
-    callback && callback();
-    _disableElementScrollTimeout = null;
-  }, enableAfter);
-}
+//   _disableElementScrollTimeout = setTimeout(function() {
+//     container.style.pointerEvents = 'auto';
+//     callback && callback();
+//     _disableElementScrollTimeout = null;
+//   }, enableAfter);
+// }
 
 // window.addEventListener('scroll', function(e) {
 //   navbar.classList.toggle('colorize', scroller.scrollTop > 0);
@@ -116,7 +116,7 @@ async function share() {
 
   if (navigator.share) {
     try {
-      await navigator.share({url, title, text: title})
+      await navigator.share({url, title, text: title});
       ga('send', 'event', 'share', 'success');
     } catch (err) {
       ga('send', 'event', 'share', 'error', err);
@@ -128,7 +128,8 @@ async function share() {
   }
 }
 
-exports.smoothScroll = smoothScroll;
-exports.share = share;
-// exports.disableElementOnScroll = disableElementOnScroll;
-})(window);
+export {
+  smoothScroll,
+  share,
+  // disableElementOnScroll,
+};
