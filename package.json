@@ -14,7 +14,8 @@
     "start": "node --experimental-modules server.mjs",
     "deploy": "gcloud app deploy app.yaml --account ebidel@gmail.com --project ebidel-dd868",
     "lint": "./node_modules/eslint/bin/eslint.js --ext .js,.mjs .",
-    "bundle": "rollup -c"
+    "bundle": "rollup -c",
+    "build": "gulp && npm run bundle"
   },
   "devDependencies": {
     "cssnano": "^4.1.0",

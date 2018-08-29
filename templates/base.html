@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#0069c0">
 
   <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <title>{% block title %}{% endblock %} - Eric Bidelman</title>
   <meta name="author" content="Eric Bidelman">
@@ -63,7 +63,9 @@
 
 {% include "footer.html" %}
 
+{#
 <!-- <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script> -->
+#}
 <script type="module" src="/js/app{% if not DEV %}.bundle{% endif %}.js"></script>
 <script nomodule src="/js/app.min.js"></script>
 
