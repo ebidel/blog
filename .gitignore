@@ -14,4 +14,3 @@ yarn-error.log
 **/*.min.css
 **/img/*.webp
 
-letsencrypt/

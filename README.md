@@ -19,11 +19,3 @@ Run `gulp` any time you make changes to JS code.
 ### Deployment
 
     yarn deploy
-
-### Updating the SSL cert
-
-From https://github.com/AirConsole/letsencrypt:
-
-1. Go to [https://ericbidelman.com/.well-known/acme-challenge/](https://ericbidelman.com/.well-known/acme-challenge/) and login as an administrator
-2. Execute the displayed command in a shell that supports curl and openssl (Google Cloud Shell can be used)
-Upload the obtained certificates on [https://console.cloud.google.com/appengine/settings/certificates](https://console.cloud.google.com/appengine/settings/certificates)
