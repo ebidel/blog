@@ -228,6 +228,10 @@ footer {
   position: relative;
 }
 
+.secondary-text {
+  color: var(--md-grey-light);
+}
+
 @media (max-width: 767px) {
   :root {
     --section-padding: 40px;

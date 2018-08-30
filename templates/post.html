@@ -3,23 +3,53 @@
 {% block title %}{{post.data.title}}{% endblock %}
 
 {% block head %}
+<style>
+.post-header {
+  margin-bottom: calc(var(--content-padding) * 3);
+  text-align: center;
+}
+#share-footer {
+  display: inline-block;
+  --twitter-color: #55acee;
+  background-color: var(--twitter-color);
+  padding: var(--content-padding);
+  margin: 0 0 calc(var(--content-padding) * 4) 0;
+  font-size: 18px;
+  color: #fff;
+}
+#share-footer .icon {
+  height: 24px;
+  width: 24px;
+  margin-right: var(--content-padding);
+}
+#share-footer a {
+  text-decoration: none;
+  color: inherit;
+}
+</style>
 <link rel="preload" href="{% if DEV %}/highlight.js/styles/github.css{% else %}/css/github.min.css{% endif %}" onload="this.rel='stylesheet'" as="style">
 {% endblock %}
 
 {% block content %}
 <section>
-{% markdown %}
+
 <header class="post-header">
   <h1 class="post-title">{{post.data.title}}</h1>
-  <div class="post-date">{{post.data.publishedStr}}</div>
+  <div class="post-date secondary-text">{{post.data.publishedStr}}</div>
 </header>
+
+{% markdown %}
 {{post.content | safe}}
 {% endmarkdown %}
 
-{#
-{% markdown year + "/" + month + "/" + file + ".md" %}
-#}
+{# {% markdown year + "/" + month + "/" + file + ".md" %} #}
 </section>
+
+<div id="share-footer">
+  <a href="#" class="layout horizontal vcenter" onclick="share(window.event)">
+    <img src="/img/icons/share.svg" class="icon"> Share this post
+  </a>
+</div>
 {% endblock %}
 
 {% block scripts %}
