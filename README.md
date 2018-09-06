@@ -1,4 +1,4 @@
-Site: [https://ericbidelman.com/](ericbidelman.com)
+Site: [ericbidelman.com](https://ericbidelman.com/)
 
 ### Development
 
