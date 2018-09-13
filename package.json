@@ -20,8 +20,8 @@
   "devDependencies": {
     "cssnano": "^4.1.0",
     "del": "^3.0.0",
-    "eslint": "^5.4.0",
-    "eslint-config-google": "^0.9.1",
+    "eslint": "^5.5.0",
+    "eslint-config-google": "^0.10.0",
     "google-closure-compiler": "^20180805.0.0",
     "gulp": "^3.9.1",
     "gulp-fn": "^0.0.3",

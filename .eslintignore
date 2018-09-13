@@ -2,3 +2,5 @@
 **/third_party/**
 **/dist/**
 gulpfile.js
+*.bundle.js
+*.min.js

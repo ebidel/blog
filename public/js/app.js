@@ -62,6 +62,7 @@ fab.addEventListener('click', e => {
 /**
  * Share the current page via navigator.share (if available) or Twitter
  * as fallback.
+ * @param {Event} e
  */
 async function share(e) {
   e.preventDefault();
