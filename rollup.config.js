@@ -30,7 +30,7 @@ export default [{
   output: {
     file: 'public/js/app.bundle.js',
     // dir: './dist',
-    name: 'app',
+    // name: 'app',
     format: 'es',
   },
   // experimentalDynamicImport: true,

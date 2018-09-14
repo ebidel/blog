@@ -33,6 +33,7 @@
     "postcss": "^7.0.2",
     "postcss-css-variables": "^0.9.0",
     "postcss-import": "^12.0.0",
+    "rollup": "^0.65.2",
     "rollup-plugin-filesize": "^4.0.1",
     "rollup-plugin-includepaths": "^0.2.3",
     "rollup-plugin-terser": "^2.0.2",
