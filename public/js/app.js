@@ -50,7 +50,6 @@ function smoothScroll(el, duration = 1, callback = null, offset = 0) {
       callback();
     }
   };
-debugger;
   cb(startTime);
 }
 
