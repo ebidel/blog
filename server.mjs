@@ -8,20 +8,10 @@ import markdown from 'nunjucks-markdown';
 import marked from 'marked';
 import highlight from 'highlight.js';
 
+import serverHelpers from './server-helpers.mjs';
 import * as posts from './posts.mjs';
 
 const POSTS_DIR = '_posts';
-
-/* eslint-disable */
-function errorHandler(err, req, res, next) {
-  if (res.headersSent) {
-    return next(err);
-  }
-  console.error('errorHandler', err);
-  res.status(500).send({errors: `${err}`});
-}
-/* eslint-enable */
-
 const DEV = process.env.DEV || false;
 const PORT = process.env.PORT || 8080;
 // const GA_ACCOUNT = 'UA-24818445-1';
@@ -46,25 +36,9 @@ env.addFilter('limit', (arr, limit) => arr.slice(0, limit));
 
 markdown.register(env, marked);
 
-app.use(function forceSSL(req, res, next) {
-  const fromCron = req.get('X-Appengine-Cron');
-  if (!fromCron && req.hostname !== 'localhost' && req.get('X-Forwarded-Proto') === 'http') {
-    return res.redirect(`https://${req.hostname}${req.url}`);
-  }
-  next();
-});
-
-// app.use(function enableCors(req, res, next) {
-//   res.set('Access-Control-Allow-Origin', '*');
-//   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
-//   next();
-// });
-
-// app.get('/:demoPage', (req, res, next) => {
-//   // const demoPage = req.params.demoPage;
-//   // console.log(demoPage)
-//   res.send(fs.readFileSync('./public/index.html', {encoding: 'utf-8'}));
-// });
+app.use(serverHelpers.forceSSL);
+// app.use(serverHelpers.enableCors);
+// app.use(serverHelpers.addRequestHelpers);
 
 // Try resource as static, first.
 app.use(express.static('public', {extensions: ['html', 'htm']}));
@@ -120,7 +94,7 @@ app.get('/:page', async (req, res, next) => {
   return res.render(`pages/${req.params.page}.html`, res.locals.data);
 });
 
-app.use(errorHandler); // catch all.
+app.use(serverHelpers.errorHandler); // catch all.
 
 app.listen(PORT, async () => {
   console.log(`App listening on port ${PORT}`); /* eslint-disable-line */
