@@ -6,7 +6,6 @@ function errorHandler(err, req, res, next) {
   if (err.message.startsWith('template not found')) {
     return res.status(404).render('404.html', {});
   }
-  console.error('errorHandler', err);
   res.status(500).send({errors: `${err}`});
 }
 
