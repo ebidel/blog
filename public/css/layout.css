@@ -12,6 +12,10 @@
 .layout.horizontal.justified {
   justify-content: space-between;
 }
+.layout.horizontal.around {
+  justify-content: space-around;
+}
+.l
 .layout.horizontal.vcenter {
   align-items: center;
 }

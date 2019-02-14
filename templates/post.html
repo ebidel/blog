@@ -37,6 +37,14 @@
   <div class="post-date secondary-text">{{post.data.publishedStr}}</div>
 </header>
 
+{% if post.toc %}
+<aside id="toc">
+{% markdown %}
+{{post.toc}}
+{% endmarkdown %}
+</aside>
+{% endif %}
+
 {% markdown %}
 {{post.content | safe}}
 {% endmarkdown %}

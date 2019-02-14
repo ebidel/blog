@@ -17,23 +17,39 @@ const PORT = process.env.PORT || 8080;
 // const GA_ACCOUNT = 'UA-24818445-1';
 const app = express();
 
+const env = nunjucks.configure(['./templates', POSTS_DIR], {
+  autoescape: true,
+  trimBlocks: true,
+  lstripBlocks: true,
+  express: app,
+  watch: DEV,
+});
+env.addFilter('limit', (arr, limit) => arr.slice(0, limit));
+
+// const renderer = new marked.Renderer();
+// renderer.heading = function(text, level) {
+//   const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+//   return `
+//     <h${level}>
+//       <a name="${escapedText}" class="anchor" href="#${escapedText}">
+//         <span class="header-link"></span>
+//       </a>
+//       ${text}
+//     </h${level}>`;
+// };
 marked.setOptions({
   gfm: true,
   headerIds: true,
   tables: true,
-  highlight: function(code, lang) {
+  // breaks: false,
+  // pendantic: false,
+  // sanitize: true,
+  // smartLists: true,
+  // renderer,
+  highlight: (code, lang) => {
     return highlight.highlightAuto(code).value;
   },
 });
-
-const env = nunjucks.configure(['./templates', POSTS_DIR], {
-  autoescape: true,
-  express: app,
-  watch: DEV,
-});
-
-env.addFilter('limit', (arr, limit) => arr.slice(0, limit));
-
 markdown.register(env, marked);
 
 app.use(serverHelpers.forceSSL);
@@ -53,8 +69,9 @@ app.get('/posts/:year/:month/:file', (req, res, next) => {
   const file = req.params.file;
   const year = req.params.year;
   const month = req.params.month;
+  const useCache = 'nocache' in req.query ? false : true;
 
-  const post = posts.get(`${POSTS_DIR}/${year}/${month}/${file}.md`);
+  const post = posts.get(`${POSTS_DIR}/${year}/${month}/${file}.md`, useCache);
 
   // const content = fs.readFileSync(path, {encoding: 'utf-8'});
   // res.send(marked(content));
@@ -96,7 +113,7 @@ app.get('/:page', async (req, res, next) => {
 
 app.use(serverHelpers.errorHandler); // catch all.
 
-app.listen(PORT, async () => {
+app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`); /* eslint-disable-line */
   console.log('Press Ctrl+C to quit.'); /* eslint-disable-line */
   // console.log('Populating posts...');

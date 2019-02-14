@@ -1,5 +1,6 @@
 import matter from 'gray-matter';
 import recursiveReadDir from 'recursive-readdir';
+import toc from 'markdown-toc';
 import formatDate from 'date-fns/format';
 import fetch from 'node-fetch';
 
@@ -61,6 +62,34 @@ async function fetchMediumPosts(username='@ebidel') {
 }
 
 /**
+ * Reads the .md file, runs it through matter, and updates the content cache.
+ * @param {string} path file to read.
+ * @return {!Object}
+ */
+function refreshMarkdownFileContent(path) {
+  const firstTwoLines = function(file, opts) {
+    file.excerpt = (file.content.split('\n').slice(0, 4).join(' '));
+  };
+
+  const result = matter.read(path, {
+    excerpt: firstTwoLines,
+    // Everything between end of front matter and this deliminter is used as
+    // post summary.
+    excerpt_separator: '<!-- end -->',
+  });
+  // Use front matter summary if one was found.
+  if (result.data.excerpt) {
+    result.excerpt = result.data.excerpt;
+  }
+  result.href = result.path.replace(POSTS_DIR, '/posts').replace('.md', '');
+  result.toc = toc(result.content).content;
+  result.data.publishedStr = prettyDate(result.data.published);
+  PATH_TO_CONTENT.set(result.path, result); // add/update to cache.
+
+  return result;
+}
+
+/**
  * Lists files in a directory, recursively.
  * @param {string} path Base folder to start.
  * @return {Array<Object>}
@@ -72,21 +101,9 @@ async function list(path) {
     return POSTS_CACHE;
   }
 
-  const firstTwoLines = function(file, opts) {
-    file.excerpt = (file.content.split('\n').slice(0, 4).join(' '));
-  };
-
   // TODO: cache and return this instead.
   const files = (await recursiveReadDir(path)).filter(f => f.endsWith('.md'));
-  const results = files.map(f => {
-    const result = matter.read(f, {excerpt: firstTwoLines});
-    result.href = result.path.replace(POSTS_DIR, '/posts').replace('.md', '');
-    result.data.publishedStr = prettyDate(result.data.published);
-
-    PATH_TO_CONTENT.set(result.path, result); // add to cache.
-
-    return result;
-  });
+  const results = files.map(f => refreshMarkdownFileContent(f));
 
   // Add in medium posts.
   if (!MEDIUM_POSTS_CACHE.length) {
@@ -104,10 +121,14 @@ async function list(path) {
 /**
  * Gets a post.
  * @param {string} path
+ * @param {boolean=} useCache Whether to consult the cache. Default to true.
  * @return {Object}
  */
-function get(path) {
-  return PATH_TO_CONTENT.get(path);
+function get(path, useCache=true) {
+  if (useCache) {
+    return PATH_TO_CONTENT.get(path);
+  }
+  return refreshMarkdownFileContent(path);
 }
 
 export {list, get};
