@@ -73,7 +73,7 @@ function refreshMarkdownFileContent(path) {
 
   const result = matter.read(path, {
     excerpt: firstTwoLines,
-    // Everything between end of front matter and this deliminter is used as
+    // Everything between end of front matter and this delimiter is used as
     // post summary.
     excerpt_separator: '<!-- end -->',
   });

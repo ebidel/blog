@@ -6,7 +6,7 @@ import express from 'express';
 import nunjucks from 'nunjucks';
 import markdown from 'nunjucks-markdown';
 import marked from 'marked';
-import highlight from 'highlight.js';
+// import highlight from 'highlight.js';
 
 import serverHelpers from './server-helpers.mjs';
 import * as posts from './posts.mjs';
@@ -46,9 +46,10 @@ marked.setOptions({
   // sanitize: true,
   // smartLists: true,
   // renderer,
-  highlight: (code, lang) => {
-    return highlight.highlightAuto(code).value;
-  },
+  // TODO: highlight js casues v8 crash on node gae runtime on pptr article.
+  // highlight: (code, lang) => {
+  //   return highlight.highlightAuto(code).value;
+  // },
 });
 markdown.register(env, marked);
 

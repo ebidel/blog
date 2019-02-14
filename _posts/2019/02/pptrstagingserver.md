@@ -113,7 +113,7 @@ async function fetchRemotePage(url) {
 To handle new pages, we fetch the homepage as the "base" template because it's generic and doesn't have special layout.
 
 As an example, if you were to run `fetchRemotePage('https://web.dev/learn')`,
-this is what you would see in full ("headful") Chrome:
+this is what you would see in full "headful" Chrome:
 
 <figure>
   <div class="cutoff">
@@ -228,7 +228,7 @@ context of a page:
 
 ```
 // Replace remote page body area with new content.
-await page.evaluate(html => {
+await page.evaluate((html) => {
   const mainSection = document.querySelector('.devsite-article-body');
   mainSection.innerHTML = html;
 }, localPageHTML);
@@ -243,7 +243,6 @@ Node into the page. In this case, the variable is the HTML string from [Step 3](
   </div>
   <figcaption>Section of the live page that gets replaced</figcaption>
 </figure>
-
 
 ### Putting it all together
 
