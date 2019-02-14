@@ -63,7 +63,7 @@ Github without having the full source of the page. How did we do that? We faked 
 
 A typical development server is a web server that runs locally on your machine.
 As you develop your site, it loads pages and tries to mimic production as much as possible.
-You can review changes, try out new features before they're shipped...you now the drill.
+You can review changes, try out new features before they're shipped...you know the drill.
 For web.dev, we didn't have this luxury. But we needed _some_ tool for contributors to preview their stuff.
 
 Our solution was to build a "content preview server" using  [Headless Chrome][headlessarticle] and [Puppeteer][pptr]. When an author wants to make a change on web.dev, we:
