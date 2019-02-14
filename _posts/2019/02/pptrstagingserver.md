@@ -1,5 +1,5 @@
 ---
-title: Puppeteer is my dev server
+title: Puppeteer is my new dev server
 published: 2019-02-14
 excerpt: How we used headless Chrome and Puppeteer to create a development server for web.dev.
 ---
