@@ -9,7 +9,7 @@ class RSSFeed {
   }
 
   create(posts) {
-    const siteOrigin = new URL(this.feedUrl).origin;
+    const siteOrigin = 'https://ericbidelman.com';
     const feed = new RSS({
       /* eslint-disable camelcase */
       title: 'Eric Bidelman',
@@ -25,7 +25,7 @@ class RSSFeed {
     });
 
     posts.forEach(post => {
-      const url = post.href.startsWith('http') ? post.href :  `${siteOrigin}${post.href}`;
+      const url = post.href.startsWith('http') ? post.href : `${siteOrigin}${post.href}`;
       feed.item({
         title: post.data.title,
         description: post.excerpt,
