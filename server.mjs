@@ -7,6 +7,7 @@ import nunjucks from 'nunjucks';
 import markdown from 'nunjucks-markdown';
 import marked from 'marked';
 // import highlight from 'highlight.js';
+import RSSFeed from './rss.mjs';
 
 import serverHelpers from './server-helpers.mjs';
 import * as posts from './posts.mjs';
@@ -55,7 +56,7 @@ markdown.register(env, marked);
 
 app.use(serverHelpers.forceSSL);
 // app.use(serverHelpers.enableCors);
-// app.use(serverHelpers.addRequestHelpers);
+app.use(serverHelpers.addRequestHelpers);
 
 // Try resource as static, first.
 app.use(express.static('public', {extensions: ['html', 'htm']}));
@@ -93,8 +94,16 @@ app.get('/', (req, res, next) => {
   return res.render(`pages/index.html`, res.locals.data);
 });
 
+app.get('/rss.xml', (req, res, next) => {
+  const feedUrl = req.getCurrentUrl();
+  const xml = (new RSSFeed(feedUrl)).create(res.locals.data.posts);
+  res.set('Content-Type', 'application/rss+xml');
+  return res.status(200).send(xml);
+});
+
 app.get('/posts', async (req, res, next) => {
   const posts = res.locals.data.posts;
+
   const postsByYear = new Map();
   posts.map(post => {
     const year = post.data.published.getFullYear();

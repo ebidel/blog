@@ -211,6 +211,11 @@ pre {
   width: 20px;
 }
 
+.navbar .rss-icon .icon {
+  height: 19px;
+  width: 19px;
+}
+
 .menu-icon {
   margin-right: var(--content-padding);
   fill: currentColor;
