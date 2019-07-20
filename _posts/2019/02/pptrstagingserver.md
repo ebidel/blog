@@ -35,7 +35,7 @@ learning. For example, we embed Glitch codelabs so developers can
 tinker with code as they read through documentation. We also integrated
 tools like [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
 directly into the docs so developers can run + iterate on their site
-performance...all without leaving our dev guides! <img src="https://www.gstatic.com/devrel-devsite/v793d75c9fcee95258e1549917c9663f004d324d6d8a30369c993045860f7ff3c/web/images/lockup.svg" title="web.dev logo" alt="web.dev logo" style="height:50px" class="pull-right">
+performance...all without leaving our dev guides! <img src="https://www.gstatic.com/devrel-devsite/va3a0eb1ff00a004a87e2f93101f27917d794beecfd23556fc6d8627bba2ff3cf/web/images/lockup.svg" title="web.dev logo" alt="web.dev logo" style="height:50px" class="pull-right">
 
 One of the challenges with working on web.dev is due to its architecture.
 Essentially, half of the codebase (backend, core frontend, CSS/JS custom elements) is internal to Google. This critical code is internal so we can host, test, and build the site using Google's shared infrastructure for developer documentation, called "DevSite". The non critical stuff (e.g. written content) was externalized on Github to foster content contributions from the community. However, this multi-repo sitch left us with a problem:
