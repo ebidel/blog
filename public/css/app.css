@@ -349,10 +349,18 @@ footer {
     --section-padding: 40px;
   }
 
-  /*.menu-icon {
-    top: var(--content-padding);
-    position: absolute;
-  }*/
+  .navbar > div {
+    width: 100%;
+  }
+
+  .navbar nav a {
+    padding: 0;
+    padding-left: var(--content-padding);
+  }
+
+  .navbar .social-icon:not(.rss-icon) {
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {
