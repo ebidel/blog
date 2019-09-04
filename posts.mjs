@@ -105,11 +105,11 @@ async function list(path) {
   const files = (await recursiveReadDir(path)).filter(f => f.endsWith('.md'));
   const results = files.map(f => refreshMarkdownFileContent(f));
 
-  // Add in medium posts.
-  if (!MEDIUM_POSTS_CACHE.length) {
-    const posts = await fetchMediumPosts('@ebidel');
-    MEDIUM_POSTS_CACHE.push(...posts);
-  }
+  // // Add in medium posts.
+  // if (!MEDIUM_POSTS_CACHE.length) {
+  //   const posts = await fetchMediumPosts('@ebidel');
+  //   MEDIUM_POSTS_CACHE.push(...posts);
+  // }
 
   posts.push(...results, ...MEDIUM_POSTS_CACHE);
   posts.sort(comparePostDate); // Sort final list.
