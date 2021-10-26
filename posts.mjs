@@ -1,10 +1,10 @@
-import matter from 'gray-matter';
-import recursiveReadDir from 'recursive-readdir';
-import toc from 'markdown-toc';
-import formatDate from 'date-fns/format';
-import fetch from 'node-fetch';
+import matter from "gray-matter";
+import recursiveReadDir from "recursive-readdir";
+import toc from "markdown-toc";
+import formatDate from "date-fns/format/index.js";
+import fetch from "node-fetch";
 
-const POSTS_DIR = '_posts';
+const POSTS_DIR = "_posts";
 const PATH_TO_CONTENT = new Map();
 const POSTS_CACHE = [];
 const MEDIUM_POSTS_CACHE = [];
@@ -15,8 +15,8 @@ const MEDIUM_POSTS_CACHE = [];
  * @return {string}
  */
 function prettyDate(published) {
-  const d = published.toISOString().split('T')[0];
-  return formatDate(d, 'MMM Do, YYYY');
+  const d = published.toISOString().split("T")[0];
+  return formatDate(d, "MMM Do, YYYY");
 }
 
 /**
@@ -41,24 +41,28 @@ function comparePostDate(postA, postB) {
  * Fetches my posts from Medium which are originals and not re-posts.
  * @param {string=} username
  */
-async function fetchMediumPosts(username='@ebidel') {
+async function fetchMediumPosts(username = "@ebidel") {
   const resp = await fetch(`https://medium.com/${username}/latest?format=json`);
   const text = await resp.text();
-  const posts = Object.values(JSON.parse(text.split('</x>')[1]).payload.references.Post);
-  return posts.filter(post => !post.importedUrl).map(post => {
-    const href = `https://medium.com/${username}/${post.uniqueSlug}`;
-    const published = new Date(post.firstPublishedAt);
-    return {
-      path: href,
-      href,
-      excerpt: post.previewContent.subtitle,
-      data: {
-        title: post.title,
-        published,
-        publishedStr: prettyDate(published),
-      },
-    };
-  });
+  const posts = Object.values(
+    JSON.parse(text.split("</x>")[1]).payload.references.Post
+  );
+  return posts
+    .filter((post) => !post.importedUrl)
+    .map((post) => {
+      const href = `https://medium.com/${username}/${post.uniqueSlug}`;
+      const published = new Date(post.firstPublishedAt);
+      return {
+        path: href,
+        href,
+        excerpt: post.previewContent.subtitle,
+        data: {
+          title: post.title,
+          published,
+          publishedStr: prettyDate(published),
+        },
+      };
+    });
 }
 
 /**
@@ -67,21 +71,21 @@ async function fetchMediumPosts(username='@ebidel') {
  * @return {!Object}
  */
 function refreshMarkdownFileContent(path) {
-  const firstTwoLines = function(file, opts) {
-    file.excerpt = (file.content.split('\n').slice(0, 4).join(' '));
+  const firstTwoLines = function (file, opts) {
+    file.excerpt = file.content.split("\n").slice(0, 4).join(" ");
   };
 
   const result = matter.read(path, {
     excerpt: firstTwoLines,
     // Everything between end of front matter and this delimiter is used as
     // post summary.
-    excerpt_separator: '<!-- end -->',
+    excerpt_separator: "<!-- end -->",
   });
   // Use front matter summary if one was found.
   if (result.data.excerpt) {
     result.excerpt = result.data.excerpt;
   }
-  result.href = result.path.replace(POSTS_DIR, '/posts').replace('.md', '');
+  result.href = result.path.replace(POSTS_DIR, "/posts").replace(".md", "");
   result.toc = toc(result.content).content;
   result.data.publishedStr = prettyDate(result.data.published);
   PATH_TO_CONTENT.set(result.path, result); // add/update to cache.
@@ -102,8 +106,8 @@ async function list(path) {
   }
 
   // TODO: cache and return this instead.
-  const files = (await recursiveReadDir(path)).filter(f => f.endsWith('.md'));
-  const results = files.map(f => refreshMarkdownFileContent(f));
+  const files = (await recursiveReadDir(path)).filter((f) => f.endsWith(".md"));
+  const results = files.map((f) => refreshMarkdownFileContent(f));
 
   // // Add in medium posts.
   // if (!MEDIUM_POSTS_CACHE.length) {
@@ -124,11 +128,11 @@ async function list(path) {
  * @param {boolean=} useCache Whether to consult the cache. Default to true.
  * @return {Object}
  */
-function get(path, useCache=true) {
+function get(path, useCache = true) {
   if (useCache) {
     return PATH_TO_CONTENT.get(path);
   }
   return refreshMarkdownFileContent(path);
 }
 
-export {list, get};
+export { list, get };

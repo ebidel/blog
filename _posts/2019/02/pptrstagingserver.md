@@ -35,7 +35,7 @@ learning. For example, we embed Glitch codelabs so developers can
 tinker with code as they read through documentation. We also integrated
 tools like [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
 directly into the docs so developers can run + iterate on their site
-performance...all without leaving our dev guides! <img src="https://www.gstatic.com/devrel-devsite/va3a0eb1ff00a004a87e2f93101f27917d794beecfd23556fc6d8627bba2ff3cf/web/images/lockup.svg" title="web.dev logo" alt="web.dev logo" style="height:50px" class="pull-right">
+performance...all without leaving our dev guides! <img src="https://web.dev/images/lockup.svg" title="web.dev logo" alt="web.dev logo" style="height:50px" class="pull-right">
 
 One of the challenges with working on web.dev is due to its architecture.
 Essentially, half of the codebase (backend, core frontend, CSS/JS custom elements) is internal to Google. This critical code is internal so we can host, test, and build the site using Google's shared infrastructure for developer documentation, called "DevSite". The non critical stuff (e.g. written content) was externalized on Github to foster content contributions from the community. However, this multi-repo sitch left us with a problem:
@@ -66,16 +66,17 @@ As you develop your site, it loads pages and tries to mimic production as much a
 You can review changes, try out new features before they're shipped...you know the drill.
 For web.dev, we didn't have this luxury. But we needed _some_ tool for contributors to preview their stuff.
 
-Our solution was to build a "content preview server" using  [Headless Chrome][headlessarticle] and [Puppeteer][pptr]. When an author wants to make a change on web.dev, we:
+Our solution was to build a "content preview server" using [Headless Chrome][headlessarticle] and [Puppeteer][pptr]. When an author wants to make a change on web.dev, we:
 
 1. Fetch the live version of page from web.dev.
+
 - Read the local checkout of the page from disk.
 - Replace any template includes with the actual content.
 - Replace the page body with the update content changes.
 
 In other words, web.dev's preview server doesn't serve pages. It **renders articles in the look and feel** of the site.
 
->web.dev's preview server doesn't serve pages. It **renders articles in the look and feel** of the site.
+> web.dev's preview server doesn't serve pages. It **renders articles in the look and feel** of the site.
 
 That's go through each of these steps, one by one.
 
@@ -332,11 +333,11 @@ we used it to mimic a dev server without having all the required files to
 render a full page. The process was simple: pull a page from its production URL,
 inject the local edits, and serve the result to authors. What I liked about this approach is that we didn't need traditional tools or build pipelines to preview web.dev content. A headless browser and DOM APIs were our build tools!
 
-If you want to explore more in this space check out my article, "[Headless Chrome: an answer to server-side rendering JS sites][headlessSSR]".
+If you want to explore more in this space check out my article, "[Headless Chrome: an answer to server-side rendering JS sites][headlessssr]".
 
 p.s. Happy Valentine's Day! ❤️
 
 [servercode]: https://github.com/GoogleChrome/web.dev/tree/master/server
 [headlessarticle]: https://developers.google.com/web/updates/2017/04/headless-chrome
-[headlessSSR]: https://developers.google.com/web/tools/puppeteer/articles/ssr
+[headlessssr]: https://developers.google.com/web/tools/puppeteer/articles/ssr
 [pptr]: https://developers.google.com/web/tools/puppeteer/

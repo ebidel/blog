@@ -11,7 +11,7 @@ published: 2016-09-14
 
 <p>Besides being 16 years in the making, h2 offers many performance improvements over it&rsquo;s 1.1 predecessor: multiplexing, header compression, server push). In a nutshell, this is difference between the two:</p>
 
-<p><img src="https://78.media.tumblr.com/9d13dc545a79af5a44e63e10d8e0fc07/tumblr_odi8wqdOvF1r0c89zo1_1280.jpg" alt="http/1.1 vs. http/2"/></p>
+<p><img src="https://64.media.tumblr.com/9d13dc545a79af5a44e63e10d8e0fc07/tumblr_odi8wqdOvF1r0c89zo1_1280.jpg" alt="http/1.1 vs. http/2"/></p>
 
 <p>One of things I&rsquo;m most excited about is that <strong>h2 makes development closer to production</strong>. By that I mean the <strong>shape of a web app doesn&rsquo;t change when we hit the deploy button</strong>.</p>
 

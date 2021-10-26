@@ -1,92 +1,100 @@
-{% extends "base.html" %}
-
-{% block title %}Home{% endblock %}
-
-{% block head %}
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block head %}
 <!-- <link rel="modulepreload" href="/render.js"> -->
 <!-- <link rel="modulepreload" href="/lit-html/lit-html.js"> -->
 <!-- <link rel="modulepreload" href="/lit-html/lib/repeat.js"> -->
 <style>
-.posts-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  margin-top: calc(var(--content-padding) * 3);
-}
-.posts-list li {
-  padding: var(--content-padding) 0;
-}
-.posts-list a {
-  text-decoration: none;
-}
-.posts-list .post-title {
-  margin-top: 0;
-}
-#avatar-container {
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
-  padding: 4px;
-  margin-right: var(--content-padding);
-  flex-shrink: 0;
-  background-color: #fff;
-}
-.avatar {
-  background: url(https://avatars2.githubusercontent.com/u/238208?v=3&s=460) no-repeat 50% 50%;
-  background-size: contain;
-  border-radius: inherit;
-  height: 100%;
-  width: 100%;
-}
-#me h1 {
-  margin-bottom: 0;
-}
-#me summary {
-  color: var(--text-secondary);
-}
+  .posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: calc(var(--content-padding) * 3);
+  }
+  .posts-list li {
+    padding: var(--content-padding) 0;
+  }
+  .posts-list a {
+    text-decoration: none;
+  }
+  .posts-list .post-title {
+    margin-top: 0;
+  }
+  #avatar-container {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    padding: 4px;
+    margin-right: var(--content-padding);
+    flex-shrink: 0;
+    background-color: #fff;
+  }
+  .avatar {
+    background: url(https://avatars2.githubusercontent.com/u/238208?v=3&s=460)
+      no-repeat 50% 50%;
+    background-size: contain;
+    border-radius: inherit;
+    height: 100%;
+    width: 100%;
+  }
+  #me h1 {
+    margin-bottom: 0;
+  }
+  #me summary {
+    color: var(--text-secondary);
+  }
+  .lyftlogo {
+    height: 40px;
+    vertical-align: middle;
+    margin-left: -8px;
+    margin-right: -8px;
+  }
 </style>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <section>
-
-<div id="me" class="layout horizontal vcenter">
-  <div id="avatar-container" class="shadow">
-    <div class="avatar" title="sup"></div>
+  <div id="me" class="layout horizontal vcenter">
+    <div id="avatar-container" class="shadow">
+      <div class="avatar" title="sup"></div>
+    </div>
+    <div>
+      <h1>Eric Bidelman</h1>
+      <summary>
+        Principal Software Engineer at
+        <img src="/img/lyft_logo.svg" alt="Lyft" class="lyftlogo" />. Previously
+        Google. Enjoy the ramblings!
+      </summary>
+    </div>
   </div>
-  <div>
-    <h1>Eric Bidelman</h1>
-    <summary>Software Engineer at Lyft. Previously Google, Chrome team. Enjoy the ramblings.</summary>
-  </div>
-</div>
 
-<ul class="posts-list">
-{%- for post in posts | limit(5) %}
-  <li class="post">
-    <div class="secondary-text">{{post.data.publishedStr}}</div>
-    <h2 class="post-title">
-      {%- if 'medium.com' in post.href %}
-        <img src="/img/icons/medium.svg" class="icon medium-icon" title="Posted on Medium" alt="Medium post">
-      {%- endif %}
-      <a href="{{post.href}}">{{post.data.title}}</a>
-    </h2>
-    <div class="post-summary">{{post.excerpt | safe | striptags(true) | truncate(200) }}</div>
-  </li>
-{%- else %}
-  <li>No posts yet!</li>
-{%- endfor %}
-</ul>
+  <ul class="posts-list">
+    {%- for post in posts | limit(5) %}
+    <li class="post">
+      <div class="secondary-text">{{post.data.publishedStr}}</div>
+      <h2 class="post-title">
+        {%- if 'medium.com' in post.href %}
+        <img
+          src="/img/icons/medium.svg"
+          class="icon medium-icon"
+          title="Posted on Medium"
+          alt="Medium post"
+        />
+        {%- endif %}
+        <a href="{{post.href}}">{{post.data.title}}</a>
+      </h2>
+      <div class="post-summary">
+        {{post.excerpt | safe | striptags(true) | truncate(200) }}
+      </div>
+    </li>
+    {%- else %}
+    <li>No posts yet!</li>
+    {%- endfor %}
+  </ul>
 
-<hr>
+  <hr />
 
-<p class="layout horizontal end">
-  <a href="/posts">More articles &rarr;</a>
-</p>
-
+  <p class="layout horizontal end">
+    <a href="/posts">More articles &rarr;</a>
+  </p>
 </section>
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <!-- <script type="module" src="main.js"></script> -->
 <!-- <script nomodule src="main.bundle.js"></script> -->
 {% endblock %}
