@@ -67,6 +67,10 @@ app.get('/sw.js', (req, res, next) => {
   res.sendFile('/js/sw.js', {root: './public'});
 });
 
+app.get('/resume', (req, res, next) => {
+  res.sendFile('/resume.pdf', {root: './public'});
+});
+
 app.get('/posts/:year/:month/:file', (req, res, next) => {
   const file = req.params.file;
   const year = req.params.year;
