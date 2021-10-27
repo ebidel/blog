@@ -54,5 +54,8 @@
     "nunjucks-markdown": "^2.0.1",
     "recursive-readdir": "^2.2.2",
     "rss": "^1.2.2"
+  },
+  "resolutions": {
+    "graceful-fs": "^4.2.4"
   }
 }
