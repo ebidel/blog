@@ -7,10 +7,10 @@ import nunjucks from 'nunjucks';
 import markdown from 'nunjucks-markdown';
 import marked from 'marked';
 // import highlight from 'highlight.js';
-import RSSFeed from './rss.mjs';
+import RSSFeed from './rss.js';
 
-import serverHelpers from './server-helpers.mjs';
-import * as posts from './posts.mjs';
+import serverHelpers from './server-helpers.js';
+import * as posts from './posts.js';
 
 const POSTS_DIR = '_posts';
 const DEV = process.env.DEV || false;

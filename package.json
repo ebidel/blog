@@ -5,13 +5,14 @@
   "description": "Eric Bidelman's Blog",
   "author": "Eric Bidelman <ebidel@>",
   "license": "Apache-2.0",
-  "main": "server.mjs",
+  "type": "module",
+  "main": "server.js",
   "engines": {
     "node": "16.x.x"
   },
   "scripts": {
     "disabled_postinstall": "gulp",
-    "start": "node server.mjs",
+    "start": "node server.js",
     "deploy": "npm run build && gcloud app deploy app.yaml --account ebidel@gmail.com --project ebidel-dd868",
     "lint": "./node_modules/eslint/bin/eslint.js --ext .js,.mjs .",
     "bundle": "rollup -c",
