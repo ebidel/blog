@@ -68,7 +68,7 @@ app.get('/sw.js', (req, res, next) => {
 });
 
 app.get('/resume', (req, res, next) => {
-  res.sendFile('/resume.pdf', {root: './public'});
+  res.redirect(301, 'https://drive.google.com/file/d/1uUkh4U9oVxLYSHR_BL2FsC3imD5SkeiD/view');
 });
 
 app.get('/posts/:year/:month/:file', (req, res, next) => {
