@@ -55,6 +55,13 @@
   {% block head %}{% endblock %}
 </head>
 <body>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G94XLSYNM9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-G94XLSYNM9');
+</script>
 
 {% include "header.html" %}
 
@@ -74,13 +81,7 @@
 
 {% block scripts %}{% endblock %}
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-24818445-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-24818445-1');
-
+<!-- <script>
   // if ('serviceWorker' in navigator) {
   //   navigator.serviceWorker.register('/sw.js').then(reg => {
   //     console.log('SW registered!');
@@ -97,6 +98,6 @@
   //     // };
   //   }).catch(err => console.error('Boo!', err));
   // }
-</script>
+</script> -->
 </body>
 </html>
