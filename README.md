@@ -18,4 +18,6 @@ Run `gulp` any time you make changes to JS code.
 
 ### Deployment
 
+Ensure you've [installed](https://cloud.google.com/sdk/docs/install) the `gcloud` CLI, then run:
+
     yarn deploy
