@@ -280,7 +280,7 @@ pre {
 
 #toc::before {
   content: '';
-  background: url(/img/icons/list_bulleted-24px.svg) no-repeat 50% 50%;
+  background: url(/img/icons/list.svg) no-repeat 50% 50%;
   background-size: calc(var(--circle-size) - 15px);
   position: absolute;
   top: 0;

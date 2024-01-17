@@ -15,13 +15,16 @@
 .layout.horizontal.around {
   justify-content: space-around;
 }
-.l
+
 .layout.horizontal.vcenter {
   align-items: center;
 }
 
 .layout.vertical {
   flex-direction: column;
+}
+.gap {
+  gap: 8px;
 }
 .flex {
   flex: 1;
