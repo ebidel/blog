@@ -1,7 +1,27 @@
-/* global ga:false */
+const scroller = document.scrollingElement || document.body;
+
+/**
+ * Initialize the progress bar using scroll driven animations.
+ */
+function initProgressBar() {
+  const progress = document.querySelector('#progress');
+  if (!progress) {
+    return;
+  }
+  progress.style.transformOrigin = '0% 50%';
+  progress.animate({
+    transform: ['scaleX(0)', 'scaleX(1)'],
+  }, {
+    fill: 'forwards',
+    timeline: new ScrollTimeline({
+      source: document.documentElement,
+    }),
+  });
+}
+
+initProgressBar();
 
 document.querySelector('.fab').addEventListener('click', e => {
-  const scroller = document.scrollingElement || document.body;
   scroller.scrollTop = 0;
 });
 

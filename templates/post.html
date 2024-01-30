@@ -25,11 +25,29 @@
   text-decoration: none;
   color: inherit;
 }
+
+.progress-container {
+  position: fixed;
+  left: 0;
+	top: 0;
+	width: 100%;
+	height: 4px;
+  z-index: 1;
+}
+
+#progress {
+	background: var(--md-blue-dark);
+	height: 100%;
+}
 </style>
 <link rel="preload" href="{% if DEV %}/highlight.js/styles/github.css{% else %}/css/github.min.css{% endif %}" onload="this.rel='stylesheet'" as="style">
 {% endblock %}
 
 {% block content %}
+<div class="progress-container">
+  <div id="progress"></div>
+</div>
+
 <section>
 
 <header class="post-header">

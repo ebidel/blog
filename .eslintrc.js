@@ -7,6 +7,10 @@ module.exports = {
     "es6": true,
     "browser": true
   },
+  "globals": {
+    ga: 'readonly',
+    ScrollTimeline: 'readonly',
+  },
   "parserOptions": {
     "ecmaVersion": 8,
     "ecmaFeatures": {
