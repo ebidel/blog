@@ -16,7 +16,7 @@ const MEDIUM_POSTS_CACHE = [];
  */
 function prettyDate(published) {
   const d = published.toISOString().split("T")[0];
-  return formatDate(d, "MMM Do, YYYY");
+  return formatDate(d, "MMM D, YYYY");
 }
 
 /**

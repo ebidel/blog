@@ -101,6 +101,10 @@ section {
   padding: var(--section-padding) 0;
 }
 
+summary {
+  font-size: 18px;
+}
+
 hr {
   height: 0;
   overflow: visible;
